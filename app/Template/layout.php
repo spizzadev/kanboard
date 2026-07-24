@@ -21,6 +21,7 @@
             <?= $this->asset->css('assets/css/light.min.css') ?>
         <?php endif ?>
         <?= $this->asset->css('assets/css/print.min.css', true, 'print') ?>
+        <?= $this->asset->css('assets/css/app.css') ?>
         <?= $this->asset->customCss() ?>
 
         <?php if (! isset($not_editable)): ?>

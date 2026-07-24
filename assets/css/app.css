@@ -1,0 +1,808 @@
+/*
+ * Kanboard — Clean Minimal design system.
+ *
+ * A ground-up visual layer authored from scratch (Linear/Notion-flavored):
+ * neutral surfaces, one restrained blue accent, generous whitespace, a real
+ * type scale, hairline separators over heavy borders, and soft tinted depth.
+ *
+ * Loaded last in layout.php, after the stock stylesheet, so it owns the whole
+ * visual layer. Kanboard's markup and JS are untouched; only structural CSS
+ * that the layout/JS depends on is preserved — everything visual is redefined
+ * here.
+ */
+
+/* =====================================================================
+   1. Tokens
+   ===================================================================== */
+:root {
+    --bg: #f6f7f9;
+    --surface: #ffffff;
+    --surface-2: #f9fafb;
+    --surface-3: #f1f2f4;
+
+    --border: #e7e9ee;
+    --border-strong: #d7dae1;
+    --divider: #eef0f3;
+
+    --text: #1c2027;
+    --text-2: #5a6472;
+    --text-3: #97a0af;
+
+    --accent: #3366ff;
+    --accent-hover: #2451e6;
+    --accent-tint: #eef2ff;
+    --accent-ring: rgba(51, 102, 255, 0.22);
+
+    --danger: #e5484d;
+    --success: #2f9e44;
+    --warning: #d9a406;
+
+    --radius-sm: 6px;
+    --radius: 8px;
+    --radius-lg: 12px;
+    --radius-xl: 16px;
+
+    --shadow-xs: 0 1px 2px rgba(20, 27, 45, 0.06);
+    --shadow-sm: 0 1px 3px rgba(20, 27, 45, 0.08), 0 1px 2px rgba(20, 27, 45, 0.04);
+    --shadow-md: 0 6px 16px rgba(20, 27, 45, 0.12);
+    --shadow-lg: 0 16px 40px rgba(20, 27, 45, 0.16);
+
+    --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Inter",
+        "Helvetica Neue", Arial, sans-serif;
+    --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+
+    /* Map Kanboard's own token names onto the system so anything still
+       reading them stays consistent. */
+    --body-background-color: var(--bg);
+    --header-background-color: var(--surface);
+    --color-primary: var(--text);
+    --color-medium: var(--text-2);
+    --color-light: var(--text-2);
+    --color-lighter: var(--border);
+    --color-dark: var(--text);
+    --link-color-primary: var(--accent);
+    --link-color-hover: var(--text);
+    --link-color-focus: var(--accent);
+}
+
+/* =====================================================================
+   2. Base
+   ===================================================================== */
+body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font);
+    font-size: 14px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.page {
+    margin: 0 auto;
+    padding: 0 24px 48px;
+    max-width: 1600px;
+}
+
+h1, h2, h3, h4 {
+    color: var(--text);
+    font-weight: 600;
+    letter-spacing: -0.011em;
+    line-height: 1.25;
+}
+
+h1 { font-size: 1.35rem; }
+h2 { font-size: 1.2rem; margin-bottom: 12px; }
+h3 { font-size: 1.05rem; margin-top: 4px; }
+
+a {
+    color: var(--accent);
+    text-decoration: none;
+    transition: color 0.12s ease;
+}
+
+a:hover,
+a:focus {
+    color: var(--accent-hover);
+    text-decoration: none;
+    outline: 0;
+}
+
+a .fa {
+    color: inherit;
+}
+
+hr {
+    border: 0;
+    border-top: 1px solid var(--divider);
+}
+
+::selection {
+    background: var(--accent-tint);
+}
+
+/* =====================================================================
+   3. Header (sticky glass chrome)
+   ===================================================================== */
+header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    height: 56px;
+    padding: 0 24px;
+    margin-bottom: 24px;
+    background: rgba(255, 255, 255, 0.82);
+    backdrop-filter: saturate(180%) blur(10px);
+    -webkit-backdrop-filter: saturate(180%) blur(10px);
+    border-bottom: 1px solid var(--border);
+}
+
+header h1 {
+    font-size: 1.05rem;
+    font-weight: 600;
+}
+
+header h1 a {
+    color: var(--text);
+    font-weight: 700;
+}
+
+header .menus-container {
+    gap: 6px;
+}
+
+/* Top-right icon actions become quiet round buttons */
+.menus-container > span > a,
+header .menus-container a {
+    color: var(--text-2);
+}
+
+/* =====================================================================
+   4. Buttons
+   ===================================================================== */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--font);
+    font-size: 0.9rem;
+    font-weight: 500;
+    line-height: 1.4;
+    padding: 7px 14px;
+    border-radius: var(--radius);
+    border: 1px solid var(--border-strong);
+    background: var(--surface);
+    color: var(--text);
+    cursor: pointer;
+    transition: background 0.14s ease, border-color 0.14s ease,
+        box-shadow 0.14s ease, transform 0.04s ease;
+}
+
+.btn:hover,
+.btn:focus {
+    background: var(--surface-2);
+    border-color: var(--border-strong);
+    color: var(--text);
+}
+
+.btn:active {
+    transform: translateY(1px);
+}
+
+.btn-blue {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+    box-shadow: var(--shadow-xs);
+}
+
+.btn-blue:hover,
+.btn-blue:focus {
+    background: var(--accent-hover);
+    border-color: var(--accent-hover);
+    color: #fff;
+}
+
+.btn-red {
+    background: var(--danger);
+    border-color: var(--danger);
+    color: #fff;
+}
+
+.btn-red:hover,
+.btn-red:focus {
+    background: #d13438;
+    border-color: #d13438;
+    color: #fff;
+}
+
+.btn:disabled {
+    color: var(--text-3);
+    background: var(--surface-3);
+    border-color: var(--border);
+    cursor: not-allowed;
+}
+
+/* =====================================================================
+   5. Forms
+   ===================================================================== */
+input[type="text"]:not(.input-addon-field),
+input[type="number"],
+input[type="email"],
+input[type="password"],
+input[type="date"],
+input[type="url"],
+input[type="search"],
+textarea,
+select {
+    font-family: var(--font);
+    font-size: 0.9rem;
+    color: var(--text);
+    background: var(--surface);
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius);
+    transition: border-color 0.14s ease, box-shadow 0.14s ease;
+}
+
+input[type="text"]:not(.input-addon-field),
+input[type="number"],
+input[type="email"],
+input[type="password"],
+input[type="date"],
+input[type="url"],
+input[type="search"],
+select {
+    height: 38px;
+    padding: 0 12px;
+}
+
+textarea {
+    padding: 10px 12px;
+    line-height: 1.5;
+}
+
+select {
+    padding: 0 10px;
+    cursor: pointer;
+}
+
+select[multiple] {
+    height: auto;
+    padding: 6px;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px var(--accent-ring);
+    outline: 0;
+}
+
+::placeholder {
+    color: var(--text-3);
+}
+
+label {
+    display: block;
+    margin-top: 14px;
+    margin-bottom: 6px;
+    font-weight: 500;
+    color: var(--text);
+    cursor: pointer;
+}
+
+input[type="checkbox"],
+input[type="radio"] {
+    accent-color: var(--accent);
+    width: 16px;
+    height: 16px;
+    vertical-align: -3px;
+}
+
+fieldset {
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 8px 16px 16px;
+    margin-top: 16px;
+}
+
+legend {
+    padding: 0 8px;
+    font-weight: 600;
+}
+
+.form-actions {
+    padding-top: 20px;
+}
+
+.form-required { color: var(--danger); }
+.form-errors, .form-error-message { color: var(--danger); }
+input.form-error, textarea.form-error { border-color: var(--danger); }
+.form-help { color: var(--text-2); font-size: 0.82rem; }
+
+.form-login {
+    max-width: 360px;
+    margin: 8vh auto 0;
+    background: var(--surface);
+    padding: 32px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-md);
+}
+
+.form-login h2 {
+    margin-bottom: 20px;
+}
+
+/* Input add-ons */
+.input-addon-field,
+.input-addon-item {
+    border: 1px solid var(--border-strong);
+    padding: 8px 12px;
+}
+.input-addon-item {
+    background: var(--surface-2);
+    color: var(--text-2);
+}
+.input-addon-field:first-child,
+.input-addon-item:first-child { border-radius: var(--radius) 0 0 var(--radius); }
+.input-addon-field:last-child,
+.input-addon-item:last-child { border-radius: 0 var(--radius) var(--radius) 0; }
+
+/* =====================================================================
+   6. Views (segmented control) + project sub-nav
+   ===================================================================== */
+.views {
+    display: inline-flex;
+    background: var(--surface-3);
+    border-radius: var(--radius);
+    padding: 3px;
+    font-size: 0.85rem;
+}
+
+.views li {
+    display: inline-flex;
+    border: none;
+    background: transparent;
+    padding: 5px 12px;
+    border-radius: var(--radius-sm);
+    transition: background 0.12s ease, color 0.12s ease;
+}
+
+.views li:first-child,
+.views li:last-child { border-radius: var(--radius-sm); }
+
+.views li a { color: var(--text-2); }
+
+.views li.active {
+    background: var(--surface);
+    box-shadow: var(--shadow-xs);
+}
+
+.views li.active a {
+    color: var(--text);
+    font-weight: 600;
+}
+
+/* =====================================================================
+   7. Board (panel columns + flat cards)
+   ===================================================================== */
+#board-container {
+    overflow-x: auto;
+    padding-bottom: 8px;
+}
+
+#board {
+    border-collapse: separate;
+    border-spacing: 14px 0;
+    table-layout: fixed;
+}
+
+#board th.board-column-header {
+    width: 288px;
+    background: transparent;
+    border: none;
+    padding: 2px 6px 12px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    color: var(--text-2);
+    vertical-align: middle;
+}
+
+#board th.board-column-header a { color: var(--text-2); }
+#board th.board-column-header a:hover { color: var(--text); }
+
+.board-column-header-task-count {
+    display: inline-block;
+    min-width: 20px;
+    text-align: center;
+    background: var(--surface-3);
+    color: var(--text-2);
+    border-radius: 20px;
+    padding: 1px 8px;
+    font-size: 0.78rem;
+    font-weight: 600;
+}
+
+.board-add-icon i {
+    color: var(--text-3);
+    transition: color 0.12s ease;
+}
+.board-add-icon i:hover,
+.board-add-icon i:focus {
+    color: var(--accent);
+}
+
+#board td {
+    background: var(--surface-3);
+    border: none;
+    border-radius: var(--radius-lg);
+    padding: 10px;
+    vertical-align: top;
+}
+
+.board-task-list {
+    min-height: 40px;
+}
+
+/* Cards */
+.task-board {
+    position: relative;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 11px 12px;
+    margin-bottom: 8px;
+    font-size: 0.86rem;
+    box-shadow: var(--shadow-xs);
+    transition: box-shadow 0.15s ease, transform 0.15s ease;
+}
+
+.task-board:last-child { margin-bottom: 0; }
+
+.task-board:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-1px);
+}
+
+.task-board a { color: var(--text); }
+
+.task-board-title {
+    margin: 2px 0 6px;
+    font-weight: 500;
+    line-height: 1.4;
+}
+
+div.task-board-status-closed {
+    border-style: solid;
+    opacity: 0.7;
+}
+
+.draggable-placeholder {
+    border: 2px dashed var(--border-strong);
+    background: var(--surface-2);
+    border-radius: var(--radius);
+    height: 64px;
+}
+
+div.draggable-item-selected {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px var(--accent-ring);
+}
+
+/* =====================================================================
+   8. Sidebar (task / project side nav)
+   ===================================================================== */
+.sidebar {
+    min-width: 240px;
+}
+
+.sidebar h2 {
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--text-3);
+    margin: 20px 0 6px;
+}
+
+.sidebar > ul li {
+    list-style: none;
+    border: none;
+    border-radius: var(--radius);
+    padding: 0;
+    line-height: normal;
+    margin-bottom: 1px;
+}
+
+.sidebar > ul li a {
+    display: block;
+    padding: 8px 12px;
+    color: var(--text-2);
+    font-weight: 500;
+    border-radius: var(--radius);
+    transition: background 0.12s ease, color 0.12s ease;
+}
+
+.sidebar > ul li:hover {
+    border: none;
+    padding: 0;
+    background: transparent;
+}
+
+.sidebar > ul li a:hover {
+    background: var(--surface-3);
+    color: var(--text);
+}
+
+.sidebar > ul li.active {
+    border: none;
+    padding: 0;
+    background: transparent;
+}
+
+.sidebar > ul li.active a {
+    background: var(--accent-tint);
+    color: var(--accent);
+    font-weight: 600;
+}
+
+.sidebar-content {
+    padding-left: 24px;
+}
+
+/* =====================================================================
+   9. Panels, alerts, accordion, task summary
+   ===================================================================== */
+.panel {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 16px;
+    box-shadow: var(--shadow-xs);
+}
+
+.alert {
+    border-radius: var(--radius);
+    border: 1px solid transparent;
+    padding: 11px 14px;
+}
+.alert-success { background: #eaf6ec; border-color: #cce9d2; color: #1e7a32; }
+.alert-error   { background: #fdecec; border-color: #f7cccc; color: #c0393c; }
+.alert-info    { background: var(--accent-tint); border-color: #d5deff; color: #2a4bd0; }
+
+.accordion-section {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    margin-bottom: 12px;
+    box-shadow: var(--shadow-xs);
+    overflow: hidden;
+}
+
+.accordion-title {
+    margin: 0;
+    padding: 14px 18px;
+    font-size: 0.98rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.12s ease;
+}
+.accordion-title:hover { background: var(--surface-2); }
+
+.accordion-content {
+    margin: 0;
+    padding: 4px 18px 18px;
+}
+
+.task-summary-container {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 18px 20px;
+    box-shadow: var(--shadow-xs);
+}
+
+.task-summary-column span { color: var(--text-2); }
+
+#task-summary h2 { color: var(--text); }
+
+/* =====================================================================
+   10. Tables
+   ===================================================================== */
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+table th,
+table td {
+    padding: 10px 12px;
+    border: none;
+    border-bottom: 1px solid var(--divider);
+    text-align: left;
+}
+
+table th {
+    font-size: 0.78rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    color: var(--text-2);
+    background: transparent;
+}
+
+table.table-striped tr:nth-child(odd) { background: var(--surface-2); }
+
+/* List view rows */
+.table-list-header {
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius) var(--radius) 0 0;
+}
+.table-list-row {
+    border-color: var(--border);
+}
+.table-list-row:hover {
+    background: var(--accent-tint);
+    border-color: var(--border);
+}
+
+.color-picker-square,
+table td .color-picker-square {
+    border: 1px solid rgba(20, 27, 45, 0.14);
+    border-radius: 4px;
+}
+
+/* =====================================================================
+   11. Dropdowns, floating menus, tooltips
+   ===================================================================== */
+ul.dropdown-submenu-open,
+#suggest-menu,
+#select-dropdown-menu,
+#tooltip-container {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    padding: 6px;
+}
+
+.dropdown-submenu-open li,
+.suggest-menu-item,
+.select-dropdown-menu-item {
+    border: none;
+    border-radius: var(--radius-sm);
+    padding: 8px 10px;
+    font-size: 0.88rem;
+    color: var(--text);
+    transition: background 0.1s ease;
+}
+
+.dropdown-submenu-open li:not(.no-hover):hover,
+.suggest-menu-item:hover {
+    background: var(--surface-3);
+}
+
+.suggest-menu-item.active,
+.select-dropdown-menu-item.active {
+    background: var(--accent);
+    color: #fff;
+}
+.suggest-menu-item.active small { color: rgba(255, 255, 255, 0.8); }
+
+.dropdown-submenu-open li:hover a,
+.dropdown-submenu-open li:hover i { color: var(--text); }
+
+.select-dropdown-input-container {
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius);
+}
+
+/* =====================================================================
+   12. Comments, activity, subtasks, thumbnails, markdown
+   ===================================================================== */
+.comment {
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 14px 16px;
+    margin-bottom: 12px;
+}
+.comment-title { border: none; }
+.comments .comment:hover { background: var(--surface-2); }
+.comment-date, .comment-visibility { color: var(--text-3); }
+
+.activity-event {
+    border-radius: var(--radius-lg);
+    padding: 14px 16px;
+    margin-bottom: 8px;
+}
+.activity-event:hover { background: var(--surface-2); }
+.activity-title { border: none; font-weight: 600; }
+.activity-date { color: var(--text-3); }
+
+.subtask-cell {
+    border-top: 1px solid var(--divider);
+    border-left: none;
+    padding: 9px 10px;
+}
+
+.file-thumbnail {
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-xs);
+    overflow: hidden;
+}
+
+.markdown { line-height: 1.6; }
+.markdown pre {
+    background: var(--surface-3);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 12px 14px;
+    font-family: var(--mono);
+    color: var(--text);
+}
+.markdown code { font-family: var(--mono); }
+.markdown blockquote {
+    border-left: 3px solid var(--border-strong);
+    color: var(--text-2);
+    padding-left: 14px;
+    margin-left: 0;
+}
+
+/* =====================================================================
+   13. Modal
+   ===================================================================== */
+#modal-overlay {
+    background: rgba(20, 27, 45, 0.5);
+    backdrop-filter: blur(3px);
+    -webkit-backdrop-filter: blur(3px);
+}
+
+#modal-box {
+    background: var(--surface);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-lg);
+    top: 4%;
+}
+
+#modal-content { padding: 8px 20px 20px; }
+#modal-header { padding: 8px 12px 0; }
+#modal-close-button { color: var(--text-2); }
+#modal-close-button:hover { color: var(--danger); }
+
+/* =====================================================================
+   14. Page header + misc
+   ===================================================================== */
+.page-header {
+    margin-bottom: 24px;
+}
+.page-header h2 {
+    border-bottom: 1px solid var(--divider);
+    padding-bottom: 10px;
+}
+.page-header .views { border-bottom: none; }
+
+.dropdown-menu-link-text,
+.dropdown-menu-link-icon { color: var(--text); }
+
+.tooltip .fa-info-circle { color: var(--text-3); }
+
+/* Avatars stay round */
+.avatar-letter { font-weight: 600; }
+
+/* =====================================================================
+   15. Reduced motion
+   ===================================================================== */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        transition-duration: 0.01ms !important;
+    }
+    .task-board:hover { transform: none; }
+}
