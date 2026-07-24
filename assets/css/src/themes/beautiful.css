@@ -348,3 +348,241 @@ ul.dropdown-submenu-open {
         transform: none;
     }
 }
+
+/* ===== Beautiful — part 2: full-surface coverage ===== */
+
+/* Page rhythm */
+.page {
+    margin-left: 16px;
+    margin-right: 16px;
+}
+
+h2, h3 {
+    font-weight: 600;
+}
+
+/* Panels */
+.panel {
+    border-radius: 10px;
+    padding: 14px 16px;
+    box-shadow: 0 1px 2px rgba(16, 24, 40, 0.05);
+}
+
+/* Alerts */
+.alert {
+    border-radius: 10px;
+    padding: 10px 14px;
+}
+
+/* Accordion sections -> clean cards */
+.accordion-section {
+    background: #ffffff;
+    border: 1px solid #e4e7ec;
+    border-radius: 10px;
+    margin-bottom: 12px;
+    box-shadow: 0 1px 2px rgba(16, 24, 40, 0.05);
+    overflow: hidden;
+}
+
+.accordion-title {
+    font-size: 1.05em;
+    font-weight: 600;
+    margin: 0;
+    padding: 13px 16px;
+    transition: background 0.12s ease;
+}
+
+.accordion-title:hover {
+    background: #f7f8fa;
+}
+
+.accordion-content {
+    margin: 0;
+    padding: 0 16px 16px;
+}
+
+/* Task summary box (drops the hardcoded 2px black border) */
+.task-summary-container {
+    border: 1px solid #e4e7ec;
+    border-radius: 10px;
+    padding: 14px 16px;
+    box-shadow: 0 1px 2px rgba(16, 24, 40, 0.05);
+}
+
+#external-task-view {
+    border: 1px solid #e4e7ec;
+    border-radius: 10px;
+}
+
+/* Comments -> cards */
+.comment {
+    border: 1px solid #eef0f3;
+    border-radius: 10px;
+    padding: 12px 14px;
+    margin-bottom: 12px;
+}
+
+.comment-title {
+    border-bottom: none;
+}
+
+.comments .comment:hover {
+    background: #f7f8fa;
+}
+
+.comments .comment-highlighted {
+    border: 1px solid var(--comment-highlighted-border-color);
+}
+
+/* Subtasks */
+.subtask-cell {
+    border-top: 1px solid #eef0f3;
+    border-left: none;
+    padding: 8px 10px;
+}
+
+/* Activity stream */
+.activity-event {
+    border-radius: 10px;
+    padding: 12px 14px;
+    margin-bottom: 10px;
+}
+
+.activity-title {
+    border-bottom: none;
+}
+
+/* Color squares (drop hardcoded black borders) */
+.color-picker-square,
+table td .color-picker-square {
+    border: 1px solid rgba(16, 24, 40, 0.15);
+    border-radius: 4px;
+}
+
+/* Floating menus: tooltip / suggest / select-dropdown */
+#tooltip-container,
+#suggest-menu,
+#select-dropdown-menu {
+    border-radius: 10px;
+    border-color: var(--dropdown-border-color);
+    box-shadow: 0 10px 28px rgba(16, 24, 40, 0.14);
+    padding: 6px;
+}
+
+.suggest-menu-item,
+.select-dropdown-menu-item {
+    border-radius: 7px;
+    border-bottom: none;
+    padding: 8px 10px;
+    transition: background 0.12s ease;
+}
+
+.suggest-menu-item.active,
+.select-dropdown-menu-item.active {
+    background: var(--link-color-primary);
+    color: #ffffff;
+}
+
+.select-dropdown-input-container {
+    border-radius: 8px;
+    border-color: var(--input-border-color);
+}
+
+/* Input add-ons */
+.input-addon-field,
+.input-addon-item {
+    border: 1px solid var(--input-border-color);
+}
+
+.input-addon-item {
+    background: #f7f8fa;
+    color: var(--color-medium);
+}
+
+.input-addon-field:first-child,
+.input-addon-item:first-child {
+    border-radius: 8px 0 0 8px;
+}
+
+.input-addon-field:last-child,
+.input-addon-item:last-child {
+    border-radius: 0 8px 8px 0;
+}
+
+/* Fieldset / legend */
+fieldset {
+    border: 1px solid #e4e7ec;
+    border-radius: 10px;
+    padding: 8px 14px 14px;
+}
+
+legend {
+    font-weight: 600;
+    padding: 0 6px;
+}
+
+/* List view rows */
+.table-list-header {
+    border-color: var(--table-list-header-border-color);
+    border-radius: 8px 8px 0 0;
+}
+
+.table-list-row {
+    border-color: var(--table-list-border-color);
+}
+
+/* File thumbnails */
+.file-thumbnail {
+    border: 1px solid #e4e7ec;
+    border-radius: 10px;
+    box-shadow: 0 1px 2px rgba(16, 24, 40, 0.06);
+}
+
+/* Markdown */
+.markdown pre {
+    background: #f7f8fa;
+    border: 1px solid #e4e7ec;
+    border-radius: 8px;
+    color: var(--color-medium);
+}
+
+.markdown blockquote {
+    border-left: 3px solid var(--color-lighter);
+}
+
+/* Page header underline */
+.page-header h2 {
+    border-bottom: 1px solid #eef0f3;
+    padding-bottom: 8px;
+}
+
+/* Native selects match the inputs */
+select {
+    border: 1px solid var(--input-border-color);
+    border-radius: 8px;
+    min-height: 36px;
+    padding: 6px 10px;
+    background: #ffffff;
+    color: var(--color-primary);
+}
+
+select[multiple] {
+    min-height: 0;
+    padding: 4px;
+}
+
+select:focus {
+    border-color: var(--input-focus-border-color);
+    box-shadow: 0 0 0 3px var(--input-focus-shadow-color);
+}
+
+/* Form controls pick up the accent */
+input[type="checkbox"],
+input[type="radio"] {
+    accent-color: var(--link-color-primary);
+}
+
+/* Board column headers */
+#board th.board-column-header {
+    border-bottom: 2px solid #eef0f3;
+}
