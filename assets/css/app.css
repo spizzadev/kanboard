@@ -806,3 +806,119 @@ ul.dropdown-submenu-open,
     }
     .task-board:hover { transform: none; }
 }
+
+/* =====================================================================
+   16. Dashboard — horizontal nav + polished lists
+   ===================================================================== */
+
+/* Turn the dashboard side column into an inline segmented top bar */
+#dashboard.sidebar-container {
+    flex-flow: column;
+}
+
+#dashboard > .sidebar {
+    max-width: 100%;
+    min-width: 0;
+    margin-bottom: 20px;
+}
+
+#dashboard > .sidebar ul {
+    display: inline-flex;
+    gap: 2px;
+    padding: 3px;
+    background: var(--surface-3);
+    border-radius: var(--radius);
+}
+
+#dashboard > .sidebar li {
+    margin: 0;
+    list-style: none;
+}
+
+#dashboard > .sidebar li a {
+    display: block;
+    padding: 6px 14px;
+    border-radius: var(--radius-sm);
+    color: var(--text-2);
+    font-weight: 500;
+    transition: background 0.12s ease, color 0.12s ease;
+}
+
+#dashboard > .sidebar li a:hover {
+    background: var(--surface);
+    color: var(--text);
+}
+
+#dashboard > .sidebar li.active a {
+    background: var(--surface);
+    color: var(--text);
+    font-weight: 600;
+    box-shadow: var(--shadow-xs);
+}
+
+#dashboard .sidebar-content {
+    padding-left: 0;
+    max-width: 100%;
+}
+
+/* Project / task lists (.table-list) as clean cards */
+.table-list {
+    font-size: 0.88rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-xs);
+    overflow: hidden;
+    margin-bottom: 24px;
+}
+
+.table-list-header {
+    background: var(--surface-2);
+    border: none;
+    border-bottom: 1px solid var(--border);
+    border-radius: 0;
+    line-height: normal;
+    padding: 11px 16px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    color: var(--text-2);
+}
+
+.table-list-header a { color: var(--text-2); font-weight: 600; }
+.table-list-header a:hover { color: var(--text); }
+
+.table-list-row {
+    border: none;
+    border-bottom: 1px solid var(--divider);
+    padding: 13px 16px;
+    transition: background 0.12s ease;
+}
+
+.table-list-row:last-child { border-bottom: none; }
+.table-list-row:nth-child(odd) { background: transparent; }
+.table-list-row:hover {
+    background: var(--surface-2);
+    border-bottom: 1px solid var(--divider);
+    border-right: none;
+}
+
+.table-list-row .table-list-title { font-weight: 500; line-height: 1.4; }
+.table-list-row .table-list-title a { color: var(--text); }
+.table-list-row .table-list-details {
+    color: var(--text-3);
+    font-weight: 400;
+    line-height: 1.5;
+    margin-top: 2px;
+}
+.table-list-row .table-list-details strong { color: var(--text-2); font-weight: 500; }
+
+.table-list-category {
+    border-radius: 20px;
+    border: 1px solid var(--border);
+    background: var(--surface-2);
+    color: var(--text-2);
+    padding: 1px 9px;
+}
+.table-list-category a { color: var(--text-2); }
