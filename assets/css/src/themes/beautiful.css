@@ -586,3 +586,18 @@ input[type="radio"] {
 #board th.board-column-header {
     border-bottom: 2px solid #eef0f3;
 }
+
+/* ===== Beautiful — part 3: link refinement ===== */
+/* Kill the default at-rest underline on body links; keep a refined,
+   offset underline on hover for affordance. Nav/menu links that already
+   opt out of hover underlines keep winning via their own rules. */
+a {
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 2px;
+    text-decoration-color: rgba(47, 111, 235, 0.4);
+}
